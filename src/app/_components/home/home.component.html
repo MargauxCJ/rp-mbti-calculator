@@ -1,2 +1,24 @@
 <h1>RP MBTI CALCULATOR</h1>
+<button mat-raised-button color="primary" (click)="test()">TEST</button>
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+    <mat-form-field appearance="outline">
+        <mat-select name="type" placeholder="Type" formControlName='type' [(value)]="selectedType">
+          <mat-option *ngFor="let type of this.eneTypeService.getEneTypeAll()" [value]="type.id">{{type.id}}</mat-option>
+        </mat-select>
+    </mat-form-field>
 
+    <mat-form-field appearance="outline">
+        <mat-select name="wing" placeholder="Wing" formControlName='wing'>
+          <mat-option *ngFor="let wing of this.eneTypeService.getWingById(selectedType)" [value]="wing">{{wing}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" class="button">Submit Dude</button>
+</form>
+
+<div *ngFor="let category of this.result">
+    <h2>{{category.name}}</h2>
+    <p *ngFor="let skill of category.skills">
+        {{skill.name}} : {{skill.score}}
+    </p>
+</div>
