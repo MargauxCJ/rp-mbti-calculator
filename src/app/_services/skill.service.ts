@@ -15,4 +15,9 @@ export const Skills: Skill[] = [
     providedIn: 'root'
 })
 
-export class SkillService {}
+export class SkillService {
+
+    public getSkillsAll() {
+        return Skills;
+    }
+}

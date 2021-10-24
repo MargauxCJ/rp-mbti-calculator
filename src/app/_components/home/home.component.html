@@ -41,6 +41,13 @@
           <mat-option *ngFor="let instinct of this.displayInstinct(selectedInstinct1)" [value]="instinct">{{instinct}}</mat-option>
         </mat-select>
     </mat-form-field>
+
+    <h2>MBTI</h2>
+    <mat-form-field appearance="outline">
+        <mat-select name="mbti" placeholder="mbti" formControlName='mbti'>
+          <mat-option *ngFor="let mbti of this.addMBTIService.getMBTIAll()" [value]="mbti.name">{{mbti.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
     <br/>
     <button mat-raised-button color="primary" type="submit" class="button">Submit Dude</button>
 </form>
