@@ -5,6 +5,7 @@ import { CategoryService } from 'src/app/_services/category.service';
 import { FormBuilder, FormGroup,FormControl } from '@angular/forms';
 import { AddEneagrammeService } from 'src/app/_services/add-eneagramme.service';
 import { AddMBTIService } from 'src/app/_services/add-MBTI.service';
+import { AddRandomService } from 'src/app/_services/add-random.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   public selectedTritype1: number = null;
   public selectedInstinct1: string = '';
   public result;
+  public isSub = false;
   
   constructor(
     public eneTypeService: EneTypeService,
@@ -24,6 +26,7 @@ export class HomeComponent implements OnInit {
     public categoryService: CategoryService,
     public addEneagrammeService: AddEneagrammeService,
     public addMBTIService: AddMBTIService,
+    public addRandomService: AddRandomService,
     private formBuilder: FormBuilder) { 
     }
 
@@ -50,15 +53,13 @@ export class HomeComponent implements OnInit {
     return this.formGroup.get('name') as FormControl
   }
 
-  test() {
-    //console.log(this.selectedWing);
-  }
 
   onSubmit(formValues) {
-    // this.randMix();
+    
     this.addEneagrammeService.eneagrammeCalculator(formValues);
-    this.addMBTIService.MBTICalculator(formValues)
-
+    this.addMBTIService.MBTICalculator(formValues);
+    this.addRandomService.randomSkillsForAll();
+    this.isSub = true;
   }
 
  
@@ -115,4 +116,13 @@ displayInstinct(selectedInstinct) {
     }
     return arr;
   }
+
+
+  reset() {
+    this.skillService.getSkillsAll().forEach(skill => {
+      skill.score = 30;
+    })
+    this.isSub = false;
+  }
+
 }
