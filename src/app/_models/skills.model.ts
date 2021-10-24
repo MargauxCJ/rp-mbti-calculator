@@ -3,5 +3,6 @@ export interface Skill {
     name: string;
     score: number;
     wing: number[];
+    instinct: string;
 }
 

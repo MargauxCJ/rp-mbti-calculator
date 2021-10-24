@@ -3,9 +3,9 @@ import { Category } from "../_models/categories.model";
 import { Skills } from "./skill.service";
 
 const Categories: Category[] = [
-  {id: 1, name: 'physique', skills: [Skills[0],Skills[1],Skills[2]]},
-  {id: 2, name: 'mental', skills: [Skills[3],Skills[4],Skills[5]]},
-  {id: 3, name: 'social', skills: [Skills[6],Skills[7],Skills[8]]}
+  {id: 1, name: 'physique', skills: [Skills[0],Skills[1],Skills[2]], instinct: 'sp'},
+  {id: 2, name: 'mental', skills: [Skills[3],Skills[4],Skills[5]], instinct: 'sx'},
+  {id: 3, name: 'social', skills: [Skills[6],Skills[7],Skills[8]], instinct: 'so'}
 ]
 
 @Injectable({

@@ -3,6 +3,7 @@ import { EneTypeService } from 'src/app/_services/type.service';
 import { SkillService } from 'src/app/_services/skill.service';
 import { CategoryService } from 'src/app/_services/category.service';
 import { FormBuilder, FormGroup,FormControl } from '@angular/forms';
+import { AddEneagrammeService } from 'src/app/_services/add-eneagramme.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,21 +14,14 @@ export class HomeComponent implements OnInit {
   public selectedType: number = 1;
   public selectedWing: number = 1;
   public selectedTritype1: number = null;
+  public selectedInstinct1: string = '';
   public result;
   
-  
-  /* SCORE ADDITION */
-  public coreScore = 45;
-  public wingScore = 25;
-  public tritype2Score = 25;
-  public tritype3Score = 15;
-  public instinctDom = 10;
-  public instinctBlind = -10;
-
   constructor(
     public eneTypeService: EneTypeService,
     public skillService: SkillService,
     public categoryService: CategoryService,
+    public addEneagrammeService: AddEneagrammeService,
     private formBuilder: FormBuilder) { 
     }
 
@@ -59,39 +53,11 @@ export class HomeComponent implements OnInit {
 
   onSubmit(formValues) {
     // this.randMix();
-    this.addCore(formValues.type); 
-    this.addWing(formValues);
-    this.addTritype2(formValues);
-    this.addTritype3(formValues);
+    this.addEneagrammeService.eneagrammeCalculator(formValues);
 
   }
 
-  randMix() {
-    this.result.forEach(category => {
-      /* CODE RAND HERE */
-    });
-    let array = [0,1,2];
-      let random = Math.floor(Math.random()* array.length);
-      random = Math.floor(Math.random() * array.length);
-  }
-
-  addCore(formValuesType) {
-    this.eneTypeService.getEneTypeAll().forEach(type => {
-      if(formValuesType === type.id){
-        type.core.score = type.core.score + this.coreScore;
-      }
-    })
-  }
-
-  addWing(formValues) {
-    this.eneTypeService.getEneTypeAll().forEach(type => {
-      if(formValues.wing === type.id){
-        type.core.score = type.core.score + this.wingScore;
-        }
-      }
-      
-    )
-  }
+ 
 
 displayTritype(selectedType, tab) {
   
@@ -119,25 +85,20 @@ displayLastTritype(){
   return this.displayTritype(this.selectedType,this.displayTritype(this.selectedTritype1, [1,2,3,4,5,6,7,8,9]));
 }
 
-  addTritype2(formValues) {
-    this.eneTypeService.getEneTypeAll().forEach(type => {
-      if(formValues.tritype2 === type.id) {
-        type.core.score = type.core.score + this.tritype2Score;
-      }
-    })
 
+displayInstinct(selectedInstinct) {
+  let tab = ['so', 'sp', 'sx'];
+  if(selectedInstinct === 'so'){
+    tab = tab.filter(res => res !== 'so');
   }
-
-  addTritype3(formValues) {
-    this.eneTypeService.getEneTypeAll().forEach(type => {
-      if(formValues.tritype3 === type.id) {
-        type.core.score = type.core.score + this.tritype3Score;
-      }
-    })
+  if(selectedInstinct === 'sp'){
+    tab = tab.filter(res => res !== 'sp');
   }
-
-
-
+  if(selectedInstinct === 'sx'){
+    tab = tab.filter(res => res !== 'sx');
+  }
+  return tab;
+}
 
   removeItemAll(arr, value) {
     var i = 0;
