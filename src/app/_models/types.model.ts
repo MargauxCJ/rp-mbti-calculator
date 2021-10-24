@@ -7,4 +7,5 @@ export interface EneType {
     desint: number;
     core: Skill;
     wingSkills: Skill[];
+    instinct: string;
 }

@@ -32,13 +32,13 @@
 
     <h2>Variantes instinctives</h2>
     <mat-form-field appearance="outline">
-        <mat-select name="instinct1" placeholder="instinct1" formControlName='instinct1' [(value)]="selectedType">
-          <mat-option [value]="selectedType">{{selectedType}}</mat-option>
+        <mat-select name="instinct1" placeholder="instinct1" formControlName='instinct1' [(value)]="selectedInstinct1">
+          <mat-option *ngFor="let instinct of ['so','sp','sx']" [value]="instinct">{{instinct}}</mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
-        <mat-select name="instinct2" placeholder="instinct2" formControlName='instinct2' [(value)]="selectedTritype1">
-          <mat-option *ngFor="let tritype of this.displayTritype(selectedType, [1,2,3,4,5,6,7,8,9])" [value]="tritype">{{tritype}}</mat-option>
+        <mat-select name="instinct2" placeholder="instinct2" formControlName='instinct2'>
+          <mat-option *ngFor="let instinct of this.displayInstinct(selectedInstinct1)" [value]="instinct">{{instinct}}</mat-option>
         </mat-select>
     </mat-form-field>
     <br/>
