@@ -1,6 +1,6 @@
 <h1>RP MBTI CALCULATOR</h1>
-<button mat-raised-button color="primary" (click)="test()">TEST</button>
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup.value)" class="form">
+    <h2>ENEAGRAMME </h2>
     <mat-form-field appearance="outline">
         <mat-select name="type" placeholder="Type" formControlName='type' [(value)]="selectedType">
           <mat-option *ngFor="let type of this.eneTypeService.getEneTypeAll()" [value]="type.id">{{type.id}}</mat-option>
@@ -8,17 +8,46 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-        <mat-select name="wing" placeholder="Wing" formControlName='wing'>
+        <mat-select name="wing" placeholder="Wing" formControlName='wing' [(value)]="selectedWing">
           <mat-option *ngFor="let wing of this.eneTypeService.getWingById(selectedType)" [value]="wing">{{wing}}</mat-option>
         </mat-select>
     </mat-form-field>
 
+    <h2>Tritype</h2>
+    <mat-form-field appearance="outline">
+        <mat-select name="tritype1" placeholder="tritype1" formControlName='tritype1' [(value)]="selectedType">
+          <mat-option [value]="selectedType">{{selectedType}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-select name="tritype2" placeholder="tritype2" formControlName='tritype2' [(value)]="selectedTritype1">
+          <mat-option *ngFor="let tritype of this.displayTritype(selectedType, [1,2,3,4,5,6,7,8,9])" [value]="tritype">{{tritype}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-select name="tritype3" placeholder="tritype3" formControlName='tritype3'>
+          <mat-option *ngFor="let tritype of this.displayLastTritype()" [value]="tritype">{{tritype}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <h2>Variantes instinctives</h2>
+    <mat-form-field appearance="outline">
+        <mat-select name="instinct1" placeholder="instinct1" formControlName='instinct1' [(value)]="selectedType">
+          <mat-option [value]="selectedType">{{selectedType}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-select name="instinct2" placeholder="instinct2" formControlName='instinct2' [(value)]="selectedTritype1">
+          <mat-option *ngFor="let tritype of this.displayTritype(selectedType, [1,2,3,4,5,6,7,8,9])" [value]="tritype">{{tritype}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br/>
     <button mat-raised-button color="primary" type="submit" class="button">Submit Dude</button>
 </form>
 
 <div *ngFor="let category of this.result">
     <h2>{{category.name}}</h2>
-    <p *ngFor="let skill of category.skills">
+    <h3 *ngFor="let skill of category.skills">
         {{skill.name}} : {{skill.score}}
-    </p>
+    </h3>
 </div>
