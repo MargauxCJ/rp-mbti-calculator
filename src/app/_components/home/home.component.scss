@@ -1,0 +1,8 @@
+.category-container {
+    display: flex;
+    flex-direction: row;
+
+    mat-form-field {
+        margin-right: 15px;
+    }
+}
