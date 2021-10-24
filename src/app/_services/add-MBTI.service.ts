@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { EneTypeService } from './type.service';
 import { SkillService } from './skill.service';
 import { CategoryService } from './category.service';
-import { identifierModuleUrl } from '@angular/compiler';
 
 const MBTI = [
     { name: 'INTJ', dom: 'N', aux: 'T', ter: 'F', inf: 'S', inex: 'i' },

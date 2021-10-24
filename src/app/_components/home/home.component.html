@@ -3,53 +3,63 @@
     <h2>ENEAGRAMME </h2>
     <mat-form-field appearance="outline">
         <mat-select name="type" placeholder="Type" formControlName='type' [(value)]="selectedType">
-          <mat-option *ngFor="let type of this.eneTypeService.getEneTypeAll()" [value]="type.id">{{type.id}}</mat-option>
+            <mat-option *ngFor="let type of this.eneTypeService.getEneTypeAll()" [value]="type.id">{{type.id}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
         <mat-select name="wing" placeholder="Wing" formControlName='wing' [(value)]="selectedWing">
-          <mat-option *ngFor="let wing of this.eneTypeService.getWingById(selectedType)" [value]="wing">{{wing}}</mat-option>
+            <mat-option *ngFor="let wing of this.eneTypeService.getWingById(selectedType)" [value]="wing">{{wing}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
 
     <h2>Tritype</h2>
     <mat-form-field appearance="outline">
         <mat-select name="tritype1" placeholder="tritype1" formControlName='tritype1' [(value)]="selectedType">
-          <mat-option [value]="selectedType">{{selectedType}}</mat-option>
+            <mat-option [value]="selectedType">{{selectedType}}</mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-select name="tritype2" placeholder="tritype2" formControlName='tritype2' [(value)]="selectedTritype1">
-          <mat-option *ngFor="let tritype of this.displayTritype(selectedType, [1,2,3,4,5,6,7,8,9])" [value]="tritype">{{tritype}}</mat-option>
+            <mat-option *ngFor="let tritype of this.displayTritype(selectedType, [1,2,3,4,5,6,7,8,9])"
+                [value]="tritype">{{tritype}}</mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-select name="tritype3" placeholder="tritype3" formControlName='tritype3'>
-          <mat-option *ngFor="let tritype of this.displayLastTritype()" [value]="tritype">{{tritype}}</mat-option>
+            <mat-option *ngFor="let tritype of this.displayLastTritype()" [value]="tritype">{{tritype}}</mat-option>
         </mat-select>
     </mat-form-field>
 
     <h2>Variantes instinctives</h2>
     <mat-form-field appearance="outline">
         <mat-select name="instinct1" placeholder="instinct1" formControlName='instinct1' [(value)]="selectedInstinct1">
-          <mat-option *ngFor="let instinct of ['so','sp','sx']" [value]="instinct">{{instinct}}</mat-option>
+            <mat-option *ngFor="let instinct of ['so','sp','sx']" [value]="instinct">{{instinct}}</mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline">
         <mat-select name="instinct2" placeholder="instinct2" formControlName='instinct2'>
-          <mat-option *ngFor="let instinct of this.displayInstinct(selectedInstinct1)" [value]="instinct">{{instinct}}</mat-option>
+            <mat-option *ngFor="let instinct of this.displayInstinct(selectedInstinct1)" [value]="instinct">{{instinct}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
 
     <h2>MBTI</h2>
     <mat-form-field appearance="outline">
         <mat-select name="mbti" placeholder="mbti" formControlName='mbti'>
-          <mat-option *ngFor="let mbti of this.addMBTIService.getMBTIAll()" [value]="mbti.name">{{mbti.name}}</mat-option>
+            <mat-option *ngFor="let mbti of this.addMBTIService.getMBTIAll()" [value]="mbti.name">{{mbti.name}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
-    <br/>
-    <button mat-raised-button color="primary" type="submit" class="button">Submit Dude</button>
+    <br />
+    <ng-container *ngIf="this.isSub === false; else resetButton">
+        <button mat-raised-button color="primary" type="submit" class="button">Submit Dude</button>
+    </ng-container>
+    <ng-template #resetButton>
+        <button mat-raised-button color="primary" (click)="reset()" class="button">Reset Dude</button>
+    </ng-template>
 </form>
 
 <div *ngFor="let category of this.result">
