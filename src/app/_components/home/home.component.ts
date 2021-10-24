@@ -4,6 +4,7 @@ import { SkillService } from 'src/app/_services/skill.service';
 import { CategoryService } from 'src/app/_services/category.service';
 import { FormBuilder, FormGroup,FormControl } from '@angular/forms';
 import { AddEneagrammeService } from 'src/app/_services/add-eneagramme.service';
+import { AddMBTIService } from 'src/app/_services/add-MBTI.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
     public skillService: SkillService,
     public categoryService: CategoryService,
     public addEneagrammeService: AddEneagrammeService,
+    public addMBTIService: AddMBTIService,
     private formBuilder: FormBuilder) { 
     }
 
@@ -39,6 +41,7 @@ export class HomeComponent implements OnInit {
       'tritype3': [null],
       'instinct1': [null],
       'instinct2': [null],
+      'mbti': [null],
       validate: ''
     });
   }
@@ -54,6 +57,7 @@ export class HomeComponent implements OnInit {
   onSubmit(formValues) {
     // this.randMix();
     this.addEneagrammeService.eneagrammeCalculator(formValues);
+    this.addMBTIService.MBTICalculator(formValues)
 
   }
 
